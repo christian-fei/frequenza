@@ -19,9 +19,18 @@
   <body>
     <main>
       <h1 id="count"></h1>
+      <ul id="history"></ul>
+      <details>
+        <summary>custom entry</summary>
+        <form id="custom-entry">
+          <input id="entry" type="datetime-local">
+          <button type="submit">add entry</button>
+        </form>
+      </details>
     </main>
-    <footer style="-display:none">
+    <details>
+      <summary>more</summary>
       <button id="reset">RESET</button>
-    </footer>
+    </details>
   </body>
 </html>
