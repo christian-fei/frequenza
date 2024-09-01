@@ -9,6 +9,7 @@
       "type": "image/png"
     }
   ],
+  "prefer_related_applications": false,
   "name": "frequenza",
   "short_name": "frequenza",
   "start_url": "/index.html"

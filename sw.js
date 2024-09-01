@@ -5,7 +5,7 @@ self.addEventListener('install', (e) => {
       '/index.html',
       '/index.js',
       '/style.css'
-    ])),
+    ]))
   );
 });
 
