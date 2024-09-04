@@ -42,25 +42,54 @@ function appendHistory (timestamp = Date.now(), history = getHistory()) {
   localStorage.setItem('history', JSON.stringify(history))
   return history
 }
+function popHistory (history = getHistory()) {
+  history.pop()
+  localStorage.setItem('history', JSON.stringify(history))
+  return history
+}
 
 function render (
-  $count = document.querySelector('#count'), 
-  $history = document.querySelector('#history'), 
+  $history = document.querySelector('#history'),
+  $stats = document.querySelector('#stats'),
   history = getHistory()
 ) {
-  if ($count) {
-    $count.innerHTML = history.length
+  if ($stats) {
+    const today = new Date(Date.now())
+    today.setUTCHours(0)
+    today.setUTCMinutes(0)
+    today.setUTCSeconds(0)
+    const yesterday = new Date(+today - 1000*60*60*24)
+    $stats.innerHTML = `
+      <div>
+        Today<br>
+        <b>${history.filter(i => i >= today).length}</b>
+      </div>
+      <div>
+        Yesterday<br>
+        <b>${history.filter(i => i >= yesterday && i < today).length}</b>
+      </div>
+      <div>
+        Overall<br>
+        <b>${history.length}</b>
+      </div>
+    `
   }
   if ($history) {
     $history.innerHTML = history.map(i => `<li>${new Date(i)}</li>`).join('')
   }
 }
 
+const $revertLastEntry = document.querySelector('#revert')
+if ($revertLastEntry) {
+  $revertLastEntry.addEventListener('click', function () {
+    popHistory()
+    render()
+  })
+}
 
-
-const $resetSWbutton = document.querySelector('#reset')
-if ($resetSWbutton) {
-  $resetSWbutton.addEventListener('click', function () {
+const $reset = document.querySelector('#reset')
+if ($reset) {
+  $reset.addEventListener('click', function () {
     //alert('resetting')
     if (confirm('Do you want to reset the app and its data?')) {
       if ('serviceWorker' in navigator) {
