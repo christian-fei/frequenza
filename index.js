@@ -62,14 +62,16 @@ const $resetSWbutton = document.querySelector('#reset')
 if ($resetSWbutton) {
   $resetSWbutton.addEventListener('click', function () {
     //alert('resetting')
-    if ('serviceWorker' in navigator) {
-      caches.keys().then(function(cacheNames) {
-        cacheNames.forEach(function(cacheName) {
-          caches.delete(cacheName)
+    if (confirm('Do you want to reset the app and its data?')) {
+      if ('serviceWorker' in navigator) {
+        caches.keys().then(function(cacheNames) {
+          cacheNames.forEach(function(cacheName) {
+            caches.delete(cacheName)
+          })
         })
-      })
+      }
+      localStorage.clear()
+      window.location.reload()
     }
-    localStorage.clear()
-    window.location.reload()
   })
 }
