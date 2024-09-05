@@ -8,6 +8,11 @@ window.onerror = function (err) {
   alert(err.toString())
 }
 
+appendHistory(Date.now())
+
+render()
+
+
 const $formCustomEntry = document.querySelector('#custom-entry')
 const $entry = document.querySelector('#entry')
 if ($formCustomEntry) {
@@ -21,9 +26,6 @@ if ($formCustomEntry) {
   })
 }
 
-appendHistory(Date.now())
-
-render()
 
 function getHistory () {
   let history = localStorage.getItem('history')
@@ -61,22 +63,31 @@ function render (
     const yesterday = new Date(+today - 1000*60*60*24)
     $stats.innerHTML = `
       <div>
-        Today<br>
         <b>${history.filter(i => i >= today).length}</b>
+        <br>
+        Today
       </div>
       <div>
-        Yesterday<br>
         <b>${history.filter(i => i >= yesterday && i < today).length}</b>
+        <br>
+        Yesterday
       </div>
       <div>
-        Overall<br>
         <b>${history.length}</b>
+        <br>
+        Overall
       </div>
     `
   }
   if ($history) {
-    $history.innerHTML = history.map(i => `<li>${new Date(i)}</li>`).join('')
+    $history.innerHTML = history.map(i => `<li>${formatTimestamp(new Date(i))}</li>`).join('')
   }
+}
+
+function formatTimestamp(timestamp) {
+  const date = new Date(timestamp);
+  if (!date) return ''
+  return date.toISOString().slice(0, 10) + ' ' + date.toLocaleTimeString();
 }
 
 const $revertLastEntry = document.querySelector('#revert')
@@ -87,20 +98,44 @@ if ($revertLastEntry) {
   })
 }
 
-const $reset = document.querySelector('#reset')
-if ($reset) {
-  $reset.addEventListener('click', function () {
-    //alert('resetting')
+const $resetAppStorage = document.querySelector('#reset-app-storage')
+const $resetApp = document.querySelector('#reset-app')
+const $resetStorage = document.querySelector('#reset-storage')
+if ($resetAppStorage) {
+  $resetAppStorage.addEventListener('click', function () {
     if (confirm('Do you want to reset the app and its data?')) {
-      if ('serviceWorker' in navigator) {
-        caches.keys().then(function(cacheNames) {
-          cacheNames.forEach(function(cacheName) {
-            caches.delete(cacheName)
-          })
-        })
-      }
-      localStorage.clear()
+      resetApp()
+      resetStorage()
       window.location.reload()
     }
   })
+}
+if ($resetApp) {
+  $resetApp.addEventListener('click', function () {
+    if (confirm('Do you want to reset the app?')) {
+      resetApp()
+      window.location.reload()
+    }
+  })
+}
+if ($resetStorage) {
+  $resetStorage.addEventListener('click', function () {
+    if (confirm('Do you want to reset the storage?')) {
+      resetStorage()
+      window.location.reload()
+    }
+  })
+}
+
+function resetApp () {
+  if ('serviceWorker' in navigator) {
+    caches.keys().then(function(cacheNames) {
+      cacheNames.forEach(function(cacheName) {
+        caches.delete(cacheName)
+      })
+    })
+  }
+}
+function resetStorage () {
+  localStorage.clear() 
 }
