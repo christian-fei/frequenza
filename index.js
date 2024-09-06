@@ -53,6 +53,8 @@ function popHistory (history = getHistory()) {
 function render (
   $history = document.querySelector('#history'),
   $stats = document.querySelector('#stats'),
+  $graph = document.querySelector('.graph'),
+  $labels = document.querySelector('.labels'),
   history = getHistory()
 ) {
   if ($stats) {
@@ -84,13 +86,66 @@ function render (
       .map(i => `<li>${formatTimestamp(new Date(i))}</li>`)
       .join('')
   }
+
+  const groupedData = groupTimestampsByDay(history)
+  if ($graph) {
+    $graph.innerHTML = ''
+    groupedData.forEach(({ date, count }) => {
+      const bar = document.createElement('div')
+      bar.className = 'bar'
+      bar.style.width = `${count * 2}%`
+      bar.setAttribute('data-date', date)
+      $graph.appendChild(bar)
+    })
+  }
+
+  if ($labels) {
+    $labels.innerHTML = ''
+    groupedData.forEach(({ date, count }) => {
+      const label = document.createElement('span')
+      label.textContent = date
+      label.style.width = `${count * 2}%`
+      $labels.appendChild(label)
+    })
+  }
 }
 
 function formatTimestamp(timestamp) {
-  const date = new Date(timestamp);
+  const date = new Date(timestamp)
   if (!date) return ''
-  return date.toISOString().slice(0, 10) + ' ' + date.toLocaleTimeString();
+  return date.toISOString().slice(0, 10) + ' ' + date.toLocaleTimeString()
 }
+
+
+/* graph viz */
+function groupTimestampsByDay(timestamps) {
+  const grouped = {}
+  
+  timestamps.forEach(timestamp => {
+    const date = new Date(timestamp)
+    const formattedDate = date.toISOString().split('T')[0]
+    
+    if (!grouped[formattedDate]) {
+      grouped[formattedDate] = []
+    }
+    
+    grouped[formattedDate].push(timestamp)
+  })
+  
+  return Object.keys(grouped).map(date => ({
+    date,
+    count: grouped[date].length
+  }))
+}
+
+
+
+
+
+
+
+
+/* DANGER ZONE */
 
 const $revertLastEntry = document.querySelector('#revert')
 if ($revertLastEntry) {

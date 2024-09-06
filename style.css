@@ -44,6 +44,26 @@ button:hover {
   list-style-type: none;
   padding-left: 0;
 }
+.graph {
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.graph .bar {
+  background-color: #3498db;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #666;
+}
+
 
 
 .segment {
