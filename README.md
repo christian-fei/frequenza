@@ -2,9 +2,11 @@
 
 stupid simple tracker of a thing you want to keep track of
 
-install it as a PWA for easy access on your homescreen
+install it as a PWA for easy access on your homescreen -> [frequenza.cri.dev](https://frequenza.cri.dev)
 
-## wat?
+try it out by spinning up a server with `npx http-server`
+
+## wat?
 
 when opened, tracks the current timestamp in localStorage
 
