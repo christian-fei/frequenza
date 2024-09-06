@@ -17,22 +17,22 @@
     <link rel="manifest" href="manifest.webmanifest">
   </head>
   <body>
-    <main>
-      <div id="stats" class="flex"></div>
-      <div class="segment">
-        <p>history</p>
-        <ul id="history"></ul>
-        <div class="graph"></div>
-        <div class="labels"></div>
-      </div class="segment">
-      <div class="segment">
-        <p>add custom entry</p>
-        <form id="custom-entry">
-          <input id="entry" type="datetime-local">
-          <button type="submit">add entry</button>
-        </form>
-      </div>
-    </main>
+    <div id="stats" class="flex"></div>
+    <div class="segment">
+      <p>history</p>
+      <ul id="history"></ul>
+    </div>
+    <div class="segment" id="graph-container">
+      <div class="graph"></div>
+      <div class="labels"></div>
+    </div>
+    <div class="segment">
+      <p>add custom entry</p>
+      <form id="custom-entry">
+        <input id="entry" type="datetime-local">
+        <button type="submit">add entry</button>
+      </form>
+    </div>
     <details class="segment">
       <summary>danger zone</summary>
       <button id="revert">Revert last entry</button>

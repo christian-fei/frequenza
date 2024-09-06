@@ -53,8 +53,7 @@ function popHistory (history = getHistory()) {
 function render (
   $history = document.querySelector('#history'),
   $stats = document.querySelector('#stats'),
-  $graph = document.querySelector('.graph'),
-  $labels = document.querySelector('.labels'),
+  $graphContainer = document.querySelector('#graph-container'),
   history = getHistory()
 ) {
   if ($stats) {
@@ -88,6 +87,8 @@ function render (
   }
 
   const groupedData = groupTimestampsByDay(history)
+  const $graph = $graphContainer.querySelector('.graph')
+  const $labels = $graphContainer.querySelector('.labels')
   if ($graph) {
     $graph.innerHTML = ''
     groupedData.forEach(({ date, count }) => {
