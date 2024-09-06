@@ -114,10 +114,8 @@ if ($resetAppStorage) {
 }
 if ($resetApp) {
   $resetApp.addEventListener('click', () => {
-    if (confirm('Do you want to reset the app?')) {
-      resetApp()
-      window.location.reload()
-    }
+    resetApp()
+    window.location.reload()
   })
 }
 if ($resetStorage) {
