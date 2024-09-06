@@ -3,7 +3,7 @@ body {
   font-size: 26px;
   line-height: 1.5;
   color: #333;
-  background-color: yellow;
+  -background-color: yellow;
   max-width: 30em;
   margin: 0 auto;
   padding: 1em;
