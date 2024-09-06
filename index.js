@@ -92,7 +92,7 @@ function formatTimestamp(timestamp) {
 
 const $revertLastEntry = document.querySelector('#revert')
 if ($revertLastEntry) {
-  $revertLastEntry.addEventListener('click', function () {
+  $revertLastEntry.addEventListener('click', () => {
     popHistory()
     render()
   })
@@ -102,7 +102,7 @@ const $resetAppStorage = document.querySelector('#reset-app-storage')
 const $resetApp = document.querySelector('#reset-app')
 const $resetStorage = document.querySelector('#reset-storage')
 if ($resetAppStorage) {
-  $resetAppStorage.addEventListener('click', function () {
+  $resetAppStorage.addEventListener('click', () => {
     if (confirm('Do you want to reset the app and its data?')) {
       resetApp()
       resetStorage()
@@ -111,7 +111,7 @@ if ($resetAppStorage) {
   })
 }
 if ($resetApp) {
-  $resetApp.addEventListener('click', function () {
+  $resetApp.addEventListener('click', () => {
     if (confirm('Do you want to reset the app?')) {
       resetApp()
       window.location.reload()
@@ -119,7 +119,7 @@ if ($resetApp) {
   })
 }
 if ($resetStorage) {
-  $resetStorage.addEventListener('click', function () {
+  $resetStorage.addEventListener('click', () => {
     if (confirm('Do you want to reset the storage?')) {
       resetStorage()
       window.location.reload()
