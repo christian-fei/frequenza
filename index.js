@@ -26,7 +26,6 @@ if ($formCustomEntry) {
   })
 }
 
-
 function getHistory () {
   let history = localStorage.getItem('history')
   try {
@@ -54,11 +53,13 @@ function renderApp (
   $history = document.querySelector('#history'),
   $stats = document.querySelector('#stats'),
   $graphContainer = document.querySelector('#graph-container'),
+  $export = document.querySelector('#export'),
   history = getHistory()
 ) {
   if ($stats) renderStats($stats, history)
   if ($history) renderHistory($history, history)
   if ($graphContainer) renderGraph($graphContainer, history)
+  if ($export) $export.textContent = JSON.stringify(history, null, 2);
 }
 
 function renderStats ($stats, history) {

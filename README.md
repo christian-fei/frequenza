@@ -16,7 +16,7 @@ can track only one thing at a time
 
 ## next
 
-[ ] export
+[x] export
 [ ] import
 [ ] delete individual history item
 [ ] show last few days in history graph

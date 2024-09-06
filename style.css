@@ -69,7 +69,10 @@ button:hover {
   margin-right: 10px;
 }
 
-
+#export {
+  overflow-y: scroll;
+  height: 200px;
+}
 
 .segment {
   margin-top: 1em;
