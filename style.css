@@ -48,7 +48,7 @@ button:hover {
   display: flex;
   width: 100%;
   margin-bottom: 20px;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .graph .bar {
@@ -60,7 +60,7 @@ button:hover {
 
 .labels {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   font-size: 14px;
   color: #333;
 }
