@@ -14,3 +14,10 @@ view stats about your habit
 
 can track only one thing at a time
 
+## next
+
+[ ] export
+[ ] import
+[ ] scroll down to latest history item
+[ ] delete individual history item
+[ ] show last few days in history graph
