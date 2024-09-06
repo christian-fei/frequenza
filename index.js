@@ -88,6 +88,7 @@ function renderStats ($stats, history) {
 
 function renderHistory($history, history) {
   $history.innerHTML = history
+  .sort((a, b) => b - a)
   .map(i => `<li>${formatTimestamp(new Date(i))}</li>`)
   .join('')
 }

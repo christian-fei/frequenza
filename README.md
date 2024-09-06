@@ -18,7 +18,6 @@ can track only one thing at a time
 
 [ ] export
 [ ] import
-[ ] scroll down to latest history item
 [ ] delete individual history item
 [ ] show last few days in history graph
 [ ] (support multiple things to track)?

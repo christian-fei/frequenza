@@ -39,7 +39,8 @@ button:hover {
 }
 
 #history {
-  max-height: 25vh;
+  -max-height: 25vh;
+  height: 200px;
   overflow-y: scroll;
   list-style-type: none;
   padding-left: 0;
