@@ -80,7 +80,9 @@ function render (
     `
   }
   if ($history) {
-    $history.innerHTML = history.map(i => `<li>${formatTimestamp(new Date(i))}</li>`).join('')
+    $history.innerHTML = history
+      .map(i => `<li>${formatTimestamp(new Date(i))}</li>`)
+      .join('')
   }
 }
 
@@ -122,7 +124,7 @@ if ($resetStorage) {
   $resetStorage.addEventListener('click', () => {
     if (confirm('Do you want to reset the storage?')) {
       resetStorage()
-      window.location.reload()
+      render()
     }
   })
 }
