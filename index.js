@@ -10,7 +10,7 @@ window.onerror = function (err) {
 
 appendHistory(Date.now())
 
-render()
+renderApp()
 
 
 const $formCustomEntry = document.querySelector('#custom-entry')
@@ -20,7 +20,7 @@ if ($formCustomEntry) {
     e.preventDefault()
     if ($entry && $entry.value) {
       appendHistory(+new Date($entry.value))
-      render()
+      renderApp()
     }
     return false
   })
@@ -50,44 +50,49 @@ function popHistory (history = getHistory()) {
   return history
 }
 
-function render (
+function renderApp (
   $history = document.querySelector('#history'),
   $stats = document.querySelector('#stats'),
   $graphContainer = document.querySelector('#graph-container'),
   history = getHistory()
 ) {
-  if ($stats) {
-    const today = new Date(Date.now())
-    today.setUTCHours(0)
-    today.setUTCMinutes(0)
-    today.setUTCSeconds(0)
-    const yesterday = new Date(+today - 1000*60*60*24)
-    $stats.innerHTML = `
-      <div>
-        <b>${history.filter(i => i >= today).length}</b>
-        <br>
-        Today
-      </div>
-      <div>
-        <b>${history.filter(i => i >= yesterday && i < today).length}</b>
-        <br>
-        Yesterday
-      </div>
-      <div>
-        <b>${history.length}</b>
-        <br>
-        Overall
-      </div>
-    `
-  }
-  if ($history) {
-    $history.innerHTML = history
-      .map(i => `<li>${formatTimestamp(new Date(i))}</li>`)
-      .join('')
-  }
+  if ($stats) renderStats($stats, history)
+  if ($history) renderHistory($history, history)
+  if ($graphContainer) renderGraph($graphContainer, history)
+}
 
-  if (!$graphContainer) return
+function renderStats ($stats, history) {
+  const today = new Date(Date.now())
+  today.setUTCHours(0)
+  today.setUTCMinutes(0)
+  today.setUTCSeconds(0)
+  const yesterday = new Date(+today - 1000*60*60*24)
+  $stats.innerHTML = `
+    <div>
+      <b>${history.filter(i => i >= today).length}</b>
+      <br>
+      Today
+    </div>
+    <div>
+      <b>${history.filter(i => i >= yesterday && i < today).length}</b>
+      <br>
+      Yesterday
+    </div>
+    <div>
+      <b>${history.length}</b>
+      <br>
+      Overall
+    </div>
+  `
+}
 
+function renderHistory($history, history) {
+  $history.innerHTML = history
+  .map(i => `<li>${formatTimestamp(new Date(i))}</li>`)
+  .join('')
+}
+
+function renderGraph($graphContainer, history) {
   const groupedData = groupTimestampsByDay(history)
   const $graph = $graphContainer.querySelector('.graph')
   const $labels = $graphContainer.querySelector('.labels')
@@ -120,8 +125,6 @@ function formatTimestamp(timestamp) {
   return date.toISOString().slice(0, 10) + ' ' + date.toLocaleTimeString()
 }
 
-
-/* graph viz */
 function groupTimestampsByDay(timestamps) {
   const grouped = {}
   
@@ -155,7 +158,7 @@ const $revertLastEntry = document.querySelector('#revert')
 if ($revertLastEntry) {
   $revertLastEntry.addEventListener('click', () => {
     popHistory()
-    render()
+    renderApp()
   })
 }
 
@@ -181,7 +184,7 @@ if ($resetStorage) {
   $resetStorage.addEventListener('click', () => {
     if (confirm('Do you want to reset the storage?')) {
       resetStorage()
-      render()
+      renderApp()
     }
   })
 }
