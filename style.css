@@ -27,7 +27,7 @@ details {
 button {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: black;
   color: white;
   text-decoration: none;
   border-radius: 4px;
@@ -35,7 +35,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #333;
 }
 
 #history {
@@ -52,7 +52,8 @@ button:hover {
 }
 
 .graph .bar {
-  background-color: #3498db;
+  background-color: #333;
+  color: white;
   height: 40px;
   margin-right: 10px;
 }
@@ -61,7 +62,10 @@ button:hover {
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  color: #666;
+  color: #333;
+}
+.labels > * {
+  margin-right: 10px;
 }
 
 

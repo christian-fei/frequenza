@@ -93,6 +93,7 @@ function render (
     groupedData.forEach(({ date, count }) => {
       const bar = document.createElement('div')
       bar.className = 'bar'
+      bar.textContent = count
       bar.style.width = `${count * 2}%`
       bar.setAttribute('data-date', date)
       $graph.appendChild(bar)
