@@ -103,7 +103,7 @@ function render (
     $labels.innerHTML = ''
     groupedData.forEach(({ date, count }) => {
       const label = document.createElement('span')
-      label.textContent = date
+      if (count > history.length * 0.1) label.textContent = date
       label.style.width = `${count * 2}%`
       $labels.appendChild(label)
     })
