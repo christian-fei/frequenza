@@ -86,6 +86,8 @@ function render (
       .join('')
   }
 
+  if (!$graphContainer) return
+
   const groupedData = groupTimestampsByDay(history)
   const $graph = $graphContainer.querySelector('.graph')
   const $labels = $graphContainer.querySelector('.labels')
