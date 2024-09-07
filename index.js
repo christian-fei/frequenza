@@ -116,7 +116,7 @@ function renderHistory($history, history) {
 }
 function handleClickHistory (event) {
   if (event.target.tagName === "LI") {
-    if (confirm('Do you want to delete this item?')) {
+    if (confirm(`Do you want to delete this item? ${formatTimestamp(+event.target.dataset.id)}`)) {
       removeHistoryItem(+event.target.dataset.id)
       renderApp()
     }
