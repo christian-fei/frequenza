@@ -12,6 +12,7 @@ const $trackEntry = document.querySelector('#track')
 if ($trackEntry) {
   $trackEntry.addEventListener('click', () => {
     addHistoryEntry()
+    renderApp()
   })
 }
 
