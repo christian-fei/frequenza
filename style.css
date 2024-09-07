@@ -51,22 +51,23 @@ button:hover {
 }
 
 .graph {
-  display: flex;
+  position: relative;
   width: 100%;
   margin-bottom: 20px;
-  justify-content: space-around;
+  height: 200px;
 }
 
 .graph .bar {
+  position: absolute;
   background-color: #333;
   color: white;
-  height: 40px;
-  margin-right: 5px;
+  font-size: 14px;
+  -writing-mode: vertical-lr;
+  -height: 50px;
+  -margin-right: 5px;
 }
 
 .labels {
-  display: flex;
-  justify-content: space-around;
   font-size: 14px;
   color: #333;
 }
