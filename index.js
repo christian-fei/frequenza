@@ -95,9 +95,16 @@ function renderStats ($stats, history) {
 function renderHistory($history, history) {
   $history.removeEventListener('click', handleClickHistory)
   $history.addEventListener('click', handleClickHistory)
+  let currentDay = null
   $history.innerHTML = history
   .sort((a, b) => b - a)
-  .map(i => `<li data-id="${i}">${formatTimestamp(new Date(i))}</li>`)
+  .map((i, index) => {
+    const day = new Date(i).toISOString().substring(0, 10)
+    if (!currentDay) currentDay = new Date(i).toISOString().substring(0, 10)
+    let prepend = ''
+    if (currentDay !== day || index === 0) prepend = `<h3>${currentDay}</h3>`
+    return `${prepend}<li data-id="${i}">${formatTimestamp(new Date(i))}</li>`
+  })
   .join('')
 }
 function handleClickHistory (event) {
@@ -140,6 +147,7 @@ function renderGraph($graphContainer, history) {
 function formatTimestamp(timestamp) {
   const date = new Date(timestamp)
   if (!date) return ''
+  return date.toLocaleTimeString()
   return date.toISOString().slice(0, 10) + ' ' + date.toLocaleTimeString()
 }
 
