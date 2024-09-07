@@ -8,6 +8,8 @@ window.onerror = function (err) {
   alert(err.toString())
 }
 
+renderApp()
+
 const $trackEntry = document.querySelector('#track')
 if ($trackEntry) {
   $trackEntry.addEventListener('click', () => {
@@ -15,10 +17,6 @@ if ($trackEntry) {
     renderApp()
   })
 }
-
-
-renderApp()
-
 
 const $formCustomEntry = document.querySelector('#custom-entry')
 const $entry = document.querySelector('#entry')
