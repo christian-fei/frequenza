@@ -8,7 +8,13 @@ window.onerror = function (err) {
   alert(err.toString())
 }
 
-appendHistory(Date.now())
+const $trackEntry = document.querySelector('#track')
+if ($trackEntry) {
+  $trackEntry.addEventListener('click', () => {
+    addHistoryEntry()
+  })
+}
+
 
 renderApp()
 
@@ -19,7 +25,7 @@ if ($formCustomEntry) {
   $formCustomEntry.addEventListener('submit', function (e) {
     e.preventDefault()
     if ($entry && $entry.value) {
-      appendHistory(+new Date($entry.value))
+      addHistoryEntry(+new Date($entry.value))
       renderApp()
     }
     return false
@@ -37,7 +43,7 @@ function getHistory () {
   return history
 }
 
-function appendHistory (timestamp = Date.now(), history = getHistory()) {
+function addHistoryEntry (timestamp = Date.now(), history = getHistory()) {
   history.push(timestamp)
   history.sort()
   localStorage.setItem('history', JSON.stringify(history))
