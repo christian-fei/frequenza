@@ -50,7 +50,7 @@ function addHistoryEntry (timestamp = Date.now(), history = getHistory()) {
   localStorage.setItem('history', JSON.stringify(history))
   return history
 }
-function popHistory (history = getHistory()) {
+function popHistoryItem (history = getHistory()) {
   history.pop()
   localStorage.setItem('history', JSON.stringify(history))
   return history
@@ -192,7 +192,7 @@ function groupTimestampsByDay(timestamps) {
 const $revertLastEntry = document.querySelector('#revert')
 if ($revertLastEntry) {
   $revertLastEntry.addEventListener('click', () => {
-    popHistory()
+    popHistoryItem()
     renderApp()
   })
 }
