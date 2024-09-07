@@ -100,6 +100,7 @@ function renderStats ($stats, history) {
 function renderHistory($history, history) {
   $history.removeEventListener('click', handleClickHistory)
   $history.addEventListener('click', handleClickHistory)
+  const groupedData = groupTimestampsByDay(history)
   let printDay = null
   $history.innerHTML = history
   .sort((a, b) => b - a)
@@ -108,7 +109,8 @@ function renderHistory($history, history) {
     const itemDate = new Date(i).toISOString().substring(0, 10)
     if (index === 0 || itemDate !== printDay) {
       printDay = itemDate
-      prepend = `<h3>${printDay}</h3>`
+      const groupCount = groupedData.find((g) => g.date === printDay).count
+      prepend = `<h3>${printDay} (${groupCount})</h3>`
     }
     return `${prepend}<li data-id="${i}">${formatTimestamp(new Date(i))}</li>`
   })
@@ -125,7 +127,7 @@ function handleClickHistory (event) {
 
 function renderGraph($graphContainer, history) {
   const groupedData = groupTimestampsByDay(history)
-  const sumCount = history.length //groupedData.reduce((acc, curr) => acc + curr.count, 0)
+  const sumCount = history.length
   const $graph = $graphContainer.querySelector('.graph')
   const $labels = $graphContainer.querySelector('.labels')
   if ($graph) {
@@ -163,7 +165,7 @@ function groupTimestampsByDay(timestamps) {
   
   timestamps.forEach(timestamp => {
     const date = new Date(timestamp)
-    const formattedDate = date.toISOString().split('T')[0]
+    const formattedDate = date.toISOString().substring(0, 10)
     
     if (!grouped[formattedDate]) {
       grouped[formattedDate] = []
