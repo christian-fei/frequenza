@@ -1,10 +1,10 @@
 body {
   font-family: 'Roboto', sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1.5;
   color: #333;
   -background-color: yellow;
-  max-width: 30em;
+  max-width: 40em;
   margin: 0 auto;
   padding: 1em;
 }
@@ -45,6 +45,11 @@ button:hover {
   list-style-type: none;
   padding-left: 0;
 }
+#history li {
+  display: inline-block;
+  margin-right: 1em;
+}
+
 .graph {
   display: flex;
   width: 100%;
