@@ -18,6 +18,6 @@ can track only one thing at a time
 
 - [x] export
 - [ ] import
-- [ ] delete individual history item
+- [x] delete individual history item
 - [ ] show last few days in history graph
 - [ ] (support multiple things to track)?

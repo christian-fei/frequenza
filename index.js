@@ -48,6 +48,11 @@ function popHistory (history = getHistory()) {
   localStorage.setItem('history', JSON.stringify(history))
   return history
 }
+function removeHistoryItem(item, history = getHistory()) {
+  history = history.filter((i) => i !== item)
+  localStorage.setItem('history', JSON.stringify(history))
+  return history
+}
 
 function renderApp (
   $history = document.querySelector('#history'),
@@ -88,10 +93,20 @@ function renderStats ($stats, history) {
 }
 
 function renderHistory($history, history) {
+  $history.removeEventListener('click', handleClickHistory)
+  $history.addEventListener('click', handleClickHistory)
   $history.innerHTML = history
   .sort((a, b) => b - a)
-  .map(i => `<li>${formatTimestamp(new Date(i))}</li>`)
+  .map(i => `<li data-id="${i}">${formatTimestamp(new Date(i))}</li>`)
   .join('')
+}
+function handleClickHistory (event) {
+  if (event.target.tagName === "LI") {
+    if (confirm('Do you want to delete this item?')) {
+      removeHistoryItem(+event.target.dataset.id)
+      renderApp()
+    }
+  }
 }
 
 function renderGraph($graphContainer, history) {
