@@ -16,8 +16,8 @@ can track only one thing at a time
 
 ## next
 
-[x] export
-[ ] import
-[ ] delete individual history item
-[ ] show last few days in history graph
-[ ] (support multiple things to track)?
+- [x] export
+- [ ] import
+- [ ] delete individual history item
+- [ ] show last few days in history graph
+- [ ] (support multiple things to track)?
