@@ -1,0 +1,16 @@
+{
+  "name": "frequenza",
+  "version": "1.0.0",
+  "description": "stupid simple tracker of a thing you want to keep track of",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx http-server",
+    "test": "cypress run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.14.2"
+  }
+}
