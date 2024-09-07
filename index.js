@@ -95,14 +95,16 @@ function renderStats ($stats, history) {
 function renderHistory($history, history) {
   $history.removeEventListener('click', handleClickHistory)
   $history.addEventListener('click', handleClickHistory)
-  let currentDay = null
+  let printDay = null
   $history.innerHTML = history
   .sort((a, b) => b - a)
   .map((i, index) => {
-    const day = new Date(i).toISOString().substring(0, 10)
-    if (!currentDay) currentDay = new Date(i).toISOString().substring(0, 10)
     let prepend = ''
-    if (currentDay !== day || index === 0) prepend = `<h3>${currentDay}</h3>`
+    const itemDate = new Date(i).toISOString().substring(0, 10)
+    if (index === 0 || itemDate !== printDay) {
+      printDay = itemDate
+      prepend = `<h3>${printDay}</h3>`
+    }
     return `${prepend}<li data-id="${i}">${formatTimestamp(new Date(i))}</li>`
   })
   .join('')
