@@ -111,6 +111,7 @@ function handleClickHistory (event) {
 
 function renderGraph($graphContainer, history) {
   const groupedData = groupTimestampsByDay(history)
+  const sumCount = history.length //groupedData.reduce((acc, curr) => acc + curr.count, 0)
   const $graph = $graphContainer.querySelector('.graph')
   const $labels = $graphContainer.querySelector('.labels')
   if ($graph) {
@@ -119,7 +120,7 @@ function renderGraph($graphContainer, history) {
       const bar = document.createElement('div')
       bar.className = 'bar'
       bar.textContent = count
-      bar.style.width = `${count * 2}%`
+      bar.style.width = `${count/sumCount * 100}%`
       bar.setAttribute('data-date', date)
       $graph.appendChild(bar)
     })
@@ -130,7 +131,7 @@ function renderGraph($graphContainer, history) {
     groupedData.forEach(({ date, count }) => {
       const label = document.createElement('span')
       if (count > history.length * 0.1) label.textContent = date
-      label.style.width = `${count * 2}%`
+      label.style.width = `${count/sumCount * 100}%`
       $labels.appendChild(label)
     })
   }
